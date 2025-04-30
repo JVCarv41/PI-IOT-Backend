@@ -8,9 +8,9 @@ const express = require('express');
 const morgan = require('morgan');
 
 // Importa conexão com banco de dados e rotas
-const connectDB = require('../database/mongo');
-const authRoutes = require('../routes/authRoutes');
-const protectedRoutes = require('../routes/protectedRoutes');
+const connectDB = require('./database/mongo');
+const authRoutes = require('./routes/authRoutes');
+const protectedRoutes = require('./routes/protectedRoutes');
 
 // Inicializa o servidor Express
 const app = express();
