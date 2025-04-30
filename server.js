@@ -1,3 +1,5 @@
+console.log('Debug Log')
+
 // Carrega variáveis de ambiente do arquivo .env
 require('dotenv').config();
 
