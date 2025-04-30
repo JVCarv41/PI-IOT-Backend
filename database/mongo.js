@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Função para conectar ao MongoDB
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI_LOCAL); // Usa URI do .env
+    await mongoose.connect(process.env.MONGO_URI); // Usa URI do .env
     console.log('MongoDB conectado');
   } catch (error) {
     console.error('Erro na conexão MongoDB:', error);
