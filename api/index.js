@@ -1,3 +1,5 @@
+console.log('Debug log')
+
 const express = require('express');
 const serverless = require('serverless-http');
 const morgan = require('morgan');
