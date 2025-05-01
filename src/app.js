@@ -11,7 +11,6 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(express.json({ limit: '1mb' }));
 
 app.use('/api', authRoutes);
 app.use('/api', protectedRoutes);
@@ -28,6 +27,8 @@ app.use((req, res, next) => {
     }
     next(err);
   }); 
+
+app.use(express.json({ limit: '1mb' }));
 
 // REMOVE THIS in a serverless environment
 // const PORT = process.env.PORT || 3000;
