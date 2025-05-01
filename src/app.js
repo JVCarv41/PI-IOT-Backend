@@ -22,8 +22,14 @@ app.use((req, res, next) => {
     console.log('Body:', req.body);
     next();
   });  
+  app.use((err, req, res, next) => {
+    if (err.type === 'entity.parse.failed') {
+      return res.status(400).json({ error: 'Invalid or missing JSON body' });
+    }
+    next(err);
+  }); 
 
-// ❌ REMOVE THIS in a serverless environment
+// REMOVE THIS in a serverless environment
 // const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
 
