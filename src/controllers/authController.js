@@ -12,14 +12,11 @@ const register = async (name, email, password) => {
     throw new Error('Email already in use');
   }
 
-  // Criptografa a senha
-  const hashedPassword = await bcrypt.hash(password, 10);
-
   // Cria novo usuário
   const newUser = new User({
     name,
     email,
-    password: hashedPassword
+    password
   });
 
   return await newUser.save();
@@ -42,7 +39,7 @@ const login = async (email, password) => {
   // Gera token
   const token = jwt.sign(
     { userId: user._id, email: user.email },
-    JWT_SECRET,
+    process.env.JWT_SECRET,
     { expiresIn: '1h' }
   );
 
