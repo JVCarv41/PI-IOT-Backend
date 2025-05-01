@@ -16,6 +16,13 @@ app.use(express.json());
 app.use('/api', authRoutes);
 app.use('/api', protectedRoutes);
 
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    console.log('Headers:', req.headers);
+    console.log('Body:', req.body);
+    next();
+  });  
+
 // ❌ REMOVE THIS in a serverless environment
 // const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
