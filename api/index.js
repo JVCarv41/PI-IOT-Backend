@@ -1,4 +1,3 @@
-console.log('Debug Index')
 const serverless = require('serverless-http');
 const app = require('../src/app');
 
