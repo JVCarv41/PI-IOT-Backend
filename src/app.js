@@ -28,7 +28,7 @@ app.get('/api/test', (req, res) => {
     res.json({ message: 'Test route is working!' });
 });
 
-Routes
+// Routes
 app.use('/api', authRoutes);
 app.use('/api', protectedRoutes);
 
