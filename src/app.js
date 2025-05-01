@@ -24,6 +24,12 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    console.log('Content-Length:', req.headers['content-length']);
+    console.log('Request Body:', req.body);
+    next();
+});
+
 app.use((err, req, res, next) => {
     if (err.type === 'entity.parse.failed') {
         return res.status(400).json({ error: 'Invalid or missing JSON body' });
