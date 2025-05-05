@@ -4,6 +4,7 @@ const authController = require('../controllers/authController');
 const { validateRegister, validateLogin } = require('../middlewares/validateUser');
 
 router.post('/register', validateRegister, async (req, res) => {
+  console.log('Register Route');
   const { name, email, password } = req.body;
 
   try {
@@ -15,6 +16,7 @@ router.post('/register', validateRegister, async (req, res) => {
 });
 
 router.post('/login', validateLogin, async (req, res) => {
+  console.log('Login Route');
   const { email, password } = req.body;
 
   try {
