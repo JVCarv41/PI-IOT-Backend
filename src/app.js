@@ -4,6 +4,7 @@ const connectDB = require('./database/mongo');
 
 const authRoutes = require('./routes/authRoutes');
 const protectedRoutes = require('./routes/protectedRoutes');
+const shoppingRoutes = require('./routes/shoppingRoutes');
 
 dotenv.config();
 connectDB();
@@ -31,5 +32,6 @@ app.get('/api/test', (req, res) => {
 // Routes
 app.use('/api', authRoutes);
 app.use('/api', protectedRoutes);
+app.use('/api/shopping', shoppingRoutes);
 
 module.exports = app;
