@@ -33,5 +33,5 @@ app.get('/api/test', (req, res) => {
 app.use('/api', authRoutes);
 app.use('/api', protectedRoutes);
 app.use('/api/shopping', shoppingRoutes);
-
 module.exports = app;
+console.log('')
