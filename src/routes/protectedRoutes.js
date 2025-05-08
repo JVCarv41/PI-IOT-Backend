@@ -4,7 +4,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 // Rota protegida - só com token válido
 router.get('/protected', authMiddleware, (req, res) => {
-  console.log('Register Route');
+  console.log('Rota com protecao por token');
   res.json({ message: 'Acesso autorizado!' });
 });
 

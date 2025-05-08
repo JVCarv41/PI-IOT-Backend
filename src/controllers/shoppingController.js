@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const shoppingService = require('../services/shoppingService');
 
 // Cria uma nova lista de compras
-// Cria uma nova lista de compras
 exports.create = async (req, res) => {
   try {
     const { date, products } = req.body;
@@ -10,7 +9,7 @@ exports.create = async (req, res) => {
 
     // Verifique se req.userId é uma string válida para ObjectId
     if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).json({ error: 'Invalid userId' });
+      return res.status(400).json({ error: 'userId invalido' });
     }
       
     // Certifique-se de que a data está sendo passada corretamente
@@ -23,12 +22,26 @@ exports.create = async (req, res) => {
 
     res.status(201).json(shoppingList);
   } catch (err) {
-    // console.log(req.userId); // Verifica o valor de req.userId
-    res.status(400).json({ error: err.message });
+    if (err.name == 'ValidationError'){
+      const firstError = Object.entries(err.errors)[0];
+
+      if (firstError) {
+        const [field, error] = firstError;
+
+        let errorMessage;
+
+        if (error.kind === 'date') {
+          errorMessage = "Data inválida. Favor inserir uma data no estilo YYYY-MM-DD";
+        } else {
+          errorMessage = error.message;
+        }
+
+        console.log(`Erro durante execução: ${errorMessage}`)
+        return res.status(400).json({ error: errorMessage });
+      }
+    }
   }
 };
-
-
 
 // Retorna todas as listas de compras do usuário
 exports.getAll = async (req, res) => {
@@ -36,6 +49,7 @@ exports.getAll = async (req, res) => {
     const lists = await shoppingService.getAll(req.userId);
     res.json(lists);
   } catch (err) {
+    console.log(`Erro durante execução: ${err.message}`)
     res.status(500).json({ error: err.message });
   }
 };
@@ -47,6 +61,7 @@ exports.getById = async (req, res) => {
     if (!list) return res.status(404).json({ message: 'Lista não encontrada' });
     res.json(list);
   } catch (err) {
+    console.log(`Erro durante execução: ${err.message}`)
     res.status(500).json({ error: err.message });
   }
 };
@@ -57,6 +72,7 @@ exports.update = async (req, res) => {
     const updated = await shoppingService.update(req.userId, req.params.id, req.body);
     res.json(updated);
   } catch (err) {
+    console.log(`Erro durante execução: ${err.message}`)
     res.status(400).json({ error: err.message });
   }
 };
@@ -67,6 +83,7 @@ exports.partialUpdate = async (req, res) => {
     const updated = await shoppingService.partialUpdate(req.userId, req.params.id, req.body);
     res.json(updated);
   } catch (err) {
+    console.log(`Erro durante execução: ${err.message}`)
     res.status(400).json({ error: err.message });
   }
 };
@@ -77,6 +94,7 @@ exports.remove = async (req, res) => {
     await shoppingService.remove(req.userId, req.params.id);
     res.status(204).send();
   } catch (err) {
+    console.log(`Erro durante execução: ${err.message}`)
     res.status(400).json({ error: err.message });
   }
 };

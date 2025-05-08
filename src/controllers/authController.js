@@ -9,7 +9,8 @@ const register = async (name, email, password) => {
   // Verifica se o e-mail já existe
   const existingUser = await User.findOne({ email });
   if (existingUser) {
-    throw new Error('Email already in use');
+    console.log("Erro: Email ja esta em uso");
+    throw new Error('Email ja esta em uso');
   }
 
   // Cria novo usuário
@@ -27,13 +28,15 @@ const login = async (email, password) => {
   // Verifica se o usuário existe
   const user = await User.findOne({ email }).select('+password'); // Inclui senha
   if (!user) {
-    throw new Error('Invalid email or password');
+    console.log("Erro: Email ou senha invalido(s)");
+    throw new Error('Email ou senha invalido(s)');
   }
 
   // Compara a senha
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    throw new Error('Invalid email or password');
+    console.log("Erro: Email ou senha invalido(s)");
+    throw new Error('Email ou senha invalido(s)');
   }
 
   // Gera token

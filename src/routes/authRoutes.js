@@ -4,24 +4,24 @@ const authController = require('../controllers/authController');
 const { validateRegister, validateLogin } = require('../middlewares/validateUser');
 
 router.post('/register', validateRegister, async (req, res) => {
-  console.log('Register Route');
+  console.log('Route de registro de usuario');
   const { name, email, password } = req.body;
 
   try {
     const user = await authController.register(name, email, password);
-    res.status(201).json({ message: 'User registered successfully', user });
+    res.status(201).json({ message: 'Usuario cadastrado com sucesso', user });
   } catch (error) {
     res.status(400).json({ error: error.message }); // Send the error message to the client
   }
 });
 
 router.post('/login', validateLogin, async (req, res) => {
-  console.log('Login Route');
+  console.log('Route de login de usuario');
   const { email, password } = req.body;
 
   try {
     const token = await authController.login(email, password);
-    res.status(200).json({ message: 'Login successful', token });
+    res.status(200).json({ message: 'Login com sucesso', token });
   } catch (error) {
     res.status(400).json({ error: error.message }); // Send the error message to the client
   }
