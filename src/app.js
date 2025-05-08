@@ -19,7 +19,7 @@ app.use((req, res, next) => {
     const originalUrl =
       req.apiGateway?.event?.url || req.originalUrl || req.url;
     req.url = originalUrl
-    console.log(`Request: ${req.method} ${originalUrl}`);
+    console.log(`\nRequest: ${req.method} ${originalUrl}`);
     next();
 });
 
@@ -34,4 +34,3 @@ app.use('/api', authRoutes);
 app.use('/api', protectedRoutes);
 app.use('/api/shopping', shoppingRoutes);
 module.exports = app;
-console.log('')
