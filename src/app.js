@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const connectDB = require('./database/mongo');
 
 const authRoutes = require('./routes/authRoutes');
@@ -10,6 +11,8 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+app.use(cors());
 
 // JSON parsing
 app.use(express.json({ limit: '1mb' }));
