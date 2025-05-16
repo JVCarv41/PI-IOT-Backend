@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
     quantity: { type: Number, required: true, default: 1 },
     unit: { 
         type: String,
-        enum: ['Kg', 'g', 'L', 'ml', 'Unidade', 'Pacote', 'Caixa'], // ou outros valores permitidos
+        enum: ['Kg', 'g', 'L', 'ml', 'Unit', 'Package', 'Box'],
         default: 'Unidade',
         required: true
     }
