@@ -1,28 +1,9 @@
 {
   "version": 2,
   "builds": [
-    { 
-      "src": "src/app.js", 
-      "use": "@vercel/node",
-      "config": { 
-        "maxLambdaSize": "10mb",
-        "includeFiles": ["src/**"] 
-      }
-    }
+    { "src": "src/app.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { 
-      "src": "/api/(.*)", 
-      "dest": "/src/app.js",
-      "methods": ["GET", "POST"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type"
-      }
-    }
-  ],
-  "rewrites": [
-    { "source": "/api/:path*", "destination": "/src/app.js" }
+    { "src": "/api/(.*)", "dest": "/src/app.js" }
   ]
 }
